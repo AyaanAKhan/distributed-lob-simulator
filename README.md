@@ -1,44 +1,79 @@
 # Distributed Limit Order Book Simulator
 
-This project implements a high‐performance limit order book (LOB) simulator designed to support
-distributed event processing.  The core matching engine is written in modern C++ (C++17) and
-communicates with external systems using Apache Kafka for real‐time event streaming and Redis for
-in‐memory state storage.
+A C++17 limit order book simulator designed as a systems and low latency engineering project. The project models the architecture of a trading system where order events can be processed, matched, and distributed to external services.
 
-## Features
+## What It Demonstrates
 
-- **C++17 core**: Efficient order matching logic using lock‐free queues and preallocated memory pools.
-- **Kafka integration**: Publish and subscribe to order events for distributed processing pipelines.
-- **Redis storage**: Maintain an in‐memory snapshot of order book state for low‐latency access.
-- **Python bindings**: Optional Python bindings via [`pybind11`](https://pybind11.readthedocs.io/) for rapid prototyping and analysis.
+This repository is meant to show comfort with performance oriented C++, concurrency concepts, event driven systems, and financial market infrastructure. It is a strong portfolio project for software engineering, systems engineering, fintech, and quant adjacent roles.
 
-## Getting Started
+## Current Scope
 
-This repository contains a minimal C++ skeleton of the limit order book engine.  You will need a
-C++17 compiler, Kafka, and Redis installed to run the full system.  To build the core library:
+- C++17 matching engine skeleton
+- Limit order book architecture for bid and ask side processing
+- Event driven design for future order submission, cancellation, and execution events
+- Planned Kafka integration for streaming market events
+- Planned Redis integration for fast in memory state snapshots
+- Optional Python binding direction for research and analysis workflows
+
+## Planned Architecture
+
+```text
+Order events
+    |
+    v
+Kafka topic
+    |
+    v
+C++ matching engine
+    |
+    +--> Trades and fills
+    +--> Book updates
+    +--> Redis snapshot
+    |
+    v
+Python analytics / dashboard
+```
+
+## Tech Stack
+
+| Area | Tools |
+|---|---|
+| Core Engine | C++17 |
+| Build System | CMake |
+| Streaming Design | Kafka |
+| State Store Design | Redis |
+| Research Interface | Python, pybind11 |
+
+## Build
 
 ```bash
-mkdir build && cd build
+mkdir build
+cd build
 cmake .. -DCMAKE_BUILD_TYPE=Release
 make
-
-# Run unit tests (if implemented)
 ctest
 ```
 
-Start Kafka and Redis according to their official documentation before running the engine.  The
-Python bindings can be generated using `pybind11` and compiled as part of the build system.
+Kafka, Redis, and Python bindings are planned extensions. The current repository focuses on the core C++ project structure and matching engine direction.
 
-## Folder Structure
+## Repository Structure
 
-```
-github_projects/distributed-lob-simulator/
-├── README.md       # Project overview and build instructions
+```text
+.
+├── README.md
 └── src/
-    └── order_book.cpp  # Minimal skeleton for the matching engine
+    └── order_book.cpp
 ```
 
-## Contributing
+## Recruiter Notes
 
-Improvements are welcome!  Feel free to add matching logic, unit tests, Kafka/Redis integration,
-or Python bindings.  Please open issues or pull requests to discuss changes.
+This project is useful for showing more than basic web development. It points toward systems programming, data structures, concurrency, event processing, and performance aware design.
+
+## Future Improvements
+
+- Implement price time priority matching
+- Add order cancellation and modification
+- Add unit tests for fills, partial fills, and book state
+- Add benchmark tests for throughput and latency
+- Add Docker Compose for Kafka and Redis
+- Add pybind11 bindings for Python analysis
