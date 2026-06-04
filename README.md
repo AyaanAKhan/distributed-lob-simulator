@@ -1,5 +1,7 @@
 # Distributed Limit Order Book Simulator
 
+![Distributed Limit Order Book Architecture Preview](docs/screenshots/lob-architecture-preview.svg)
+
 A C++17 limit order book simulator designed as a systems and low latency engineering project. The project models the architecture of a trading system where order events can be processed, matched, and distributed to external services.
 
 ## What It Demonstrates
